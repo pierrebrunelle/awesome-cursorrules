@@ -53,19 +53,21 @@ Pixeltable is a declarative multimodal AI data engine for Python. It provides SQ
   ```python
   from pixeltable.functions.huggingface import clip
 
-  t.add_embedding_index('image', string_embed=clip.clip_text, image_embed=clip.clip_image)
+  clip_model = clip.using(model_id='openai/clip-vit-base-patch32')
+  t.add_embedding_index('image', embedding=clip_model)
   ```
 - Run similarity searches using `.similarity()` in `.order_by()`:
   ```python
-  sim = t.image.similarity('golden retriever puppy')
+  sim = t.image.similarity(string='golden retriever puppy')
   results = t.order_by(sim, asc=False).limit(5).select(t.image, sim).collect()
   ```
 
 ## CLI & Service Workflow
 
 - Initialize workspaces with `pxt init`.
-- Scaffold starter FastAPI services with `pxt service example --out app.py`.
-- Apply migrations and schema updates with `pxt schema update app.py <table_name>`.
+- Scaffold a starter FastAPI service with `pxt service example --out app.py`.
+- Apply schema changes with `pxt schema update app.py <app_name>`.
+- Update the declared services with `pxt service update app.py <app_name>`.
 
 ## Anti-Patterns to Avoid
 

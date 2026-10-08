@@ -41,7 +41,7 @@ Pixeltable is a declarative multimodal AI data engine for Python. It provides SQ
   ```
 - Wrap custom Python functions in `@pxt.udf`:
   ```python
-  @pxt.udf(return_type=pxt.String)
+  @pxt.udf
   def clean_text(s: str) -> str:
       return s.strip().lower()
   ```
